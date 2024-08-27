@@ -1,0 +1,8 @@
+name: ChainedTogether
+version: '${version}'
+main: de.ole101.chained.ChainedTogether
+api-version: '1.21.1'
+description: A Minecraft plugin that tries to recreate the game Chained Together
+authors:
+  - ole101
+  - ImGxrke
