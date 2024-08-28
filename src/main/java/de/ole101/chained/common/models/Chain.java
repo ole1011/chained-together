@@ -16,7 +16,7 @@ public class Chain {
     private Slime slime;
     private BukkitTask task;
 
-    public Slime attachLeash() {
+    public void attachLeash() {
         Location offset = this.target.getLocation().add(0, 0.5, 0);
         this.slime = this.target.getWorld().spawn(offset, Slime.class, slime -> {
             slime.setSize(0);
@@ -29,7 +29,5 @@ public class Chain {
             slime.setInvulnerable(true);
             slime.setLeashHolder(this.player);
         });
-
-        return this.slime;
     }
 }
