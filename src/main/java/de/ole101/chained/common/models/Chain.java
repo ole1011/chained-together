@@ -2,7 +2,6 @@ package de.ole101.chained.common.models;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
@@ -10,7 +9,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 @Data
 @Builder
-@RequiredArgsConstructor
 public class Chain {
 
     private final Player player;
