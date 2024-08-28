@@ -4,7 +4,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.ole101.chained.common.GuiceModule;
 import de.ole101.chained.common.registry.Registry;
-import de.ole101.chained.services.ChainService;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j2;
@@ -20,8 +19,6 @@ public class ChainedTogether extends JavaPlugin {
     private final Injector injector;
     private final Registry registry;
 
-    private ChainService chainService;
-
     public ChainedTogether() {
         this.injector = Guice.createInjector(new GuiceModule(this));
         this.registry = new Registry(this, getClassLoader(), this.injector);
@@ -33,7 +30,6 @@ public class ChainedTogether extends JavaPlugin {
 
         Bukkit.getServicesManager().register(Injector.class, this.injector, this, ServicePriority.Normal);
 
-        this.chainService = new ChainService(this);
         this.registry.registerAllListeners();
 
         log.info("ChainedTogether enabled in {}ms", System.currentTimeMillis() - startTime);

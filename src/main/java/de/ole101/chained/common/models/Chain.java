@@ -1,5 +1,6 @@
-package de.ole101.chained.common;
+package de.ole101.chained.common.models;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Slime;
 import org.bukkit.scheduler.BukkitTask;
 
 @Data
+@Builder
 @RequiredArgsConstructor
 public class Chain {
 
@@ -17,8 +19,8 @@ public class Chain {
     private BukkitTask task;
 
     public Slime attachLeash() {
-        Location offset = target.getLocation().add(0, 0.5, 0);
-        this.slime = target.getWorld().spawn(offset, Slime.class, slime -> {
+        Location offset = this.target.getLocation().add(0, 0.5, 0);
+        this.slime = this.target.getWorld().spawn(offset, Slime.class, slime -> {
             slime.setSize(0);
             slime.setAI(false);
             slime.setSilent(true);
@@ -29,7 +31,7 @@ public class Chain {
             slime.setInvulnerable(true);
         });
 
-        slime.setLeashHolder(player);
-        return slime;
+        this.slime.setLeashHolder(this.player);
+        return this.slime;
     }
 }
