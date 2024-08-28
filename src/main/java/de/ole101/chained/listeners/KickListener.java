@@ -17,16 +17,15 @@ public class KickListener implements Listener {
     private ChainService chainService;
 
     @EventHandler
-    public void onKick(PlayerKickEvent e) {
-        if (e.getCause() != FLYING_PLAYER) {
+    public void onKick(PlayerKickEvent event) {
+        if (event.getCause() != FLYING_PLAYER) {
             return;
         }
 
-        Player p = e.getPlayer();
-        boolean isChained = chainService.getActiveChains().stream()
-                .anyMatch(chain -> chain.getPlayer().equals(p) || chain.getTarget().equals(p));
+        Player player = event.getPlayer();
+        boolean isChained = this.chainService.getActiveChains().stream()
+                .anyMatch(chain -> chain.getPlayer().equals(player) || chain.getTarget().equals(player));
 
-        e.setCancelled(isChained);
+        event.setCancelled(isChained);
     }
-
 }

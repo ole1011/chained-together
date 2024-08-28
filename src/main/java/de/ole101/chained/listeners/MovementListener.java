@@ -32,6 +32,6 @@ public class MovementListener implements Listener {
             return;
         }
 
-        chainService.getLastMoved().put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
+        this.chainService.getLastMoved().put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
     }
 }

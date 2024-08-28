@@ -15,13 +15,11 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        Player p = event.getPlayer();
-        Scoreboard sb = p.getScoreboard();
+        Player player = event.getPlayer();
+        Scoreboard scoreboard = player.getScoreboard();
+        Team team = ofNullable(scoreboard.getTeam("NoCollision")).orElse(scoreboard.registerNewTeam("NoCollision"));
 
-        ofNullable(sb.getTeam("NoCollision")).ifPresentOrElse(team -> team.addPlayer(p), () -> {
-            Team team = sb.registerNewTeam("NoCollision");
-            team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
-            team.addPlayer(p);
-        });
+        team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
+        team.addPlayer(player);
     }
 }

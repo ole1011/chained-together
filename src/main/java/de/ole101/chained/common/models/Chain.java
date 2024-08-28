@@ -27,9 +27,9 @@ public class Chain {
             slime.setNoPhysics(true);
             slime.setCollidable(false);
             slime.setInvulnerable(true);
+            slime.setLeashHolder(this.player);
         });
 
-        this.slime.setLeashHolder(this.player);
         return this.slime;
     }
 }

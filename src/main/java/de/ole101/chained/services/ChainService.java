@@ -10,9 +10,9 @@ import org.bukkit.entity.Slime;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -22,7 +22,7 @@ public class ChainService {
     @Inject
     public ChainedTogether chainedTogether;
 
-    private final List<Chain> activeChains = new ArrayList<>();
+    private final Set<Chain> activeChains = new HashSet<>();
     private final HashMap<UUID, Long> lastMoved = new HashMap<>();
 
     public void chainTogether(Player player, Player target) {
@@ -45,8 +45,8 @@ public class ChainService {
 
                 double distance = player.getLocation().distance(target.getLocation());
                 if (distance > 5) {
-                    long lastMovementPlayer = lastMoved.getOrDefault(player.getUniqueId(), 0L);
-                    long lastMovementTarget = lastMoved.getOrDefault(target.getUniqueId(), 0L);
+                    long lastMovementPlayer = ChainService.this.lastMoved.getOrDefault(player.getUniqueId(), 0L);
+                    long lastMovementTarget = ChainService.this.lastMoved.getOrDefault(target.getUniqueId(), 0L);
                     Player pullingPlayer = lastMovementPlayer > lastMovementTarget ? player : target;
                     Player pulledPlayer = pullingPlayer == player ? target : player;
 

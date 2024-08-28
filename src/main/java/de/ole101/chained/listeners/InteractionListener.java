@@ -27,7 +27,7 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        //TODO: Request/Accepting, etc.
+        // TODO: Request/Accepting, etc.
 
         this.chainService.chainTogether(player, target);
     }
