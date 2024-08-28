@@ -27,8 +27,11 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        // TODO: Request/Accepting, etc.
+        if (this.chainService.getActiveChains().stream().anyMatch(chain -> chain.getPlayer().equals(player) || chain.getTarget().equals(player))) {
+            return;
+        }
 
-        this.chainService.chainTogether(player, target);
+        this.chainService.requestChaining(player, target);
+//        this.chainService.chainTogether(player, target);
     }
 }

@@ -10,4 +10,5 @@ public class Colors {
     public static final TextColor GREEN = TextColor.fromHexString("#3FED56");
     public static final TextColor WHITE = TextColor.fromHexString("#fcfcfc");
     public static final TextColor GRAY = TextColor.fromHexString("#B0B0B0");
+    public static final TextColor YELLOW = TextColor.fromHexString("#fcfc54");
 }
