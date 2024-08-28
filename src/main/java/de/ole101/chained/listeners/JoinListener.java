@@ -17,7 +17,7 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Scoreboard scoreboard = player.getScoreboard();
-        Team team = ofNullable(scoreboard.getTeam("NoCollision")).orElse(scoreboard.registerNewTeam("NoCollision"));
+        Team team = ofNullable(scoreboard.getTeam("NoCollision")).orElseGet(() -> scoreboard.registerNewTeam("NoCollision"));
 
         team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
         team.addPlayer(player);
