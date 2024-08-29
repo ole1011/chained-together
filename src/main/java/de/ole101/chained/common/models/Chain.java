@@ -30,4 +30,9 @@ public class Chain {
             slime.setLeashHolder(this.player);
         });
     }
+
+    public void disband() {
+        this.slime.remove();
+        this.task.cancel();
+    }
 }

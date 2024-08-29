@@ -18,6 +18,7 @@ public class LeashListener implements Listener {
         boolean isChain = this.chainService.getActiveChains().stream()
                 .anyMatch(chain -> chain.getSlime().equals(event.getEntity()));
 
+        event.setDropLeash(!isChain);
         event.setCancelled(isChain);
     }
 }
