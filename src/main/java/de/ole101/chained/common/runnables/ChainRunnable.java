@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 @RequiredArgsConstructor
 public class ChainRunnable extends BukkitRunnable {
@@ -52,7 +53,12 @@ public class ChainRunnable extends BukkitRunnable {
                 pulledPlayer = pullingPlayer == player ? target : player;
             }
 
-            pulledPlayer.setVelocity(pullingPlayer.getLocation().toVector().subtract(pulledPlayer.getLocation().toVector()).normalize().multiply(0.5));
+            Vector pullingPlayerLocationVector = pullingPlayer.getLocation().toVector();
+            Vector pulledPlayerLocationVector = pulledPlayer.getLocation().toVector();
+            double multiplier = Math.max(0.5, (distance - 5) * 0.5);
+
+            Vector velocity = pullingPlayerLocationVector.subtract(pulledPlayerLocationVector).normalize().multiply(multiplier);
+            pulledPlayer.setVelocity(velocity);
         }
 
         slime.teleport(target.getLocation().add(0, 0.5, 0));
