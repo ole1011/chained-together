@@ -20,8 +20,7 @@ public class ChainRunnable extends BukkitRunnable {
         Player target = this.chain.getTarget();
         Slime slime = this.chain.getSlime();
 
-        //TODO: Proper check when to cancel (disconnected, etc.)
-        if (slime.isDead()) {
+        if (slime.isDead() || !player.isOnline() || !target.isOnline()) {
             this.chainService.getActiveChains().remove(this.chain);
             cancel();
             return;
