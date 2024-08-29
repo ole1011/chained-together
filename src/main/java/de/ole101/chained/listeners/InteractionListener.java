@@ -35,7 +35,8 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        if (this.chainService.getRequestedChains().containsValue(player.getUniqueId()) && this.chainService.getRequestedChains().entrySet().stream().anyMatch(entry -> entry.getKey().equals(target.getUniqueId()))) {
+        boolean isRequestingTarget = this.chainService.getRequestedChains().entrySet().stream().anyMatch(entry -> entry.getKey().equals(target.getUniqueId()));
+        if (this.chainService.getRequestedChains().containsValue(player.getUniqueId()) && isRequestingTarget) {
             this.chainService.acceptRequest(player, target);
             return;
         }
