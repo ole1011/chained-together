@@ -24,10 +24,6 @@ public class MovementListener implements Listener {
             return;
         }
 
-        if (!player.isOnGround()) {
-            return;
-        }
-
         if (!event.hasChangedPosition()) {
             return;
         }

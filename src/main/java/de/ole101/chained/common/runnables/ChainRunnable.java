@@ -34,6 +34,24 @@ public class ChainRunnable extends BukkitRunnable {
             Player pullingPlayer = lastMovementPlayer > lastMovementTarget ? player : target;
             Player pulledPlayer = pullingPlayer == player ? target : player;
 
+            boolean playerInAir = !player.isOnGround();
+            boolean targetInAir = !target.isOnGround();
+
+            boolean bothInAir = playerInAir && targetInAir;
+            boolean onePlayerInAir = !bothInAir && (playerInAir || targetInAir);
+
+            if (onePlayerInAir) {
+                Player hangingPlayer = playerInAir ? player : target;
+
+                pullingPlayer = hangingPlayer == player ? target : player;
+                pulledPlayer = hangingPlayer;
+            }
+
+            if (bothInAir) {
+                pullingPlayer = player.getY() > target.getY() ? target : player;
+                pulledPlayer = pullingPlayer == player ? target : player;
+            }
+
             pulledPlayer.setVelocity(pullingPlayer.getLocation().toVector().subtract(pulledPlayer.getLocation().toVector()).normalize().multiply(0.5));
         }
 
