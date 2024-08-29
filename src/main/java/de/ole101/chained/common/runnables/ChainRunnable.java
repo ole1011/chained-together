@@ -15,14 +15,14 @@ public class ChainRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        Player player = chain.getPlayer();
-        Player target = chain.getTarget();
-        Slime slime = chain.getSlime();
+        Player player = this.chain.getPlayer();
+        Player target = this.chain.getTarget();
+        Slime slime = this.chain.getSlime();
 
         //TODO: Proper check when to cancel (disconnected, etc.)
         if (slime.isDead()) {
-            this.chainService.getActiveChains().remove(chain);
-            this.cancel();
+            this.chainService.getActiveChains().remove(this.chain);
+            cancel();
             return;
         }
 
