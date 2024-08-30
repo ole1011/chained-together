@@ -1,5 +1,6 @@
 package de.ole101.chained.common.models;
 
+import de.ole101.chained.common.enums.Difficulty;
 import lombok.Builder;
 import lombok.Data;
 import org.bukkit.Location;
@@ -13,6 +14,7 @@ public class Chain {
 
     private final Player player;
     private final Player target;
+    private final Difficulty difficulty;
     private Slime slime;
     private BukkitTask task;
 

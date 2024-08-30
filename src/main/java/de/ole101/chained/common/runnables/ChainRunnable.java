@@ -27,7 +27,7 @@ public class ChainRunnable extends BukkitRunnable {
         }
 
         double distance = player.getLocation().distance(target.getLocation());
-        if (distance > 5) {
+        if (distance > this.chain.getDifficulty().getChainLength()) {
             long lastMovementPlayer = this.chainService.getLastMoved().getOrDefault(player.getUniqueId(), 0L);
             long lastMovementTarget = this.chainService.getLastMoved().getOrDefault(target.getUniqueId(), 0L);
 

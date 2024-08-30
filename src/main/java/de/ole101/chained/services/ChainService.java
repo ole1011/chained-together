@@ -2,6 +2,7 @@ package de.ole101.chained.services;
 
 import com.google.inject.Inject;
 import de.ole101.chained.ChainedTogether;
+import de.ole101.chained.common.enums.Difficulty;
 import de.ole101.chained.common.models.Chain;
 import de.ole101.chained.common.runnables.ChainRunnable;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import static de.ole101.chained.common.Colors.GREEN;
 import static de.ole101.chained.common.Colors.LIGHT_GRAY;
 import static de.ole101.chained.common.Colors.YELLOW;
 import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.event.ClickEvent.callback;
 
 @Getter
 @RequiredArgsConstructor
@@ -67,16 +69,42 @@ public class ChainService {
                 .append(text("hat die Coop-Anfrage", LIGHT_GRAY)).appendSpace()
                 .append(text("angenommen.", GREEN));
 
+        Component difficultyComponent = text("Wähle nun eine Schwierigkeit aus:", LIGHT_GRAY).appendSpace();
+
+        for (Difficulty difficulty : Difficulty.values()) {
+            difficultyComponent = difficultyComponent.append(text(difficulty.getDisplayName(), difficulty.getColor())
+                    .hoverEvent(text("Klicke zum auswählen", LIGHT_GRAY))
+                    .clickEvent(callback(audience -> {
+                        if (this.activeChains.stream().anyMatch(chain -> chain.getPlayer().equals(player) || chain.getTarget().equals(player))) {
+                            return;
+                        }
+
+                        Component selectedDifficultyComponent = text("Du hast die Schwierigkeit", LIGHT_GRAY).appendSpace()
+                                .append(text(difficulty.getDisplayName(), difficulty.getColor())).appendSpace()
+                                .append(text("ausgewählt.", LIGHT_GRAY));
+
+                        Component selectedDifficultyComponentTarget = text(player.getName(), YELLOW).appendSpace()
+                                .append(text("hat die Schwierigkeit", LIGHT_GRAY)).appendSpace()
+                                .append(text(difficulty.getDisplayName(), difficulty.getColor())).appendSpace()
+                                .append(text("ausgewählt.", LIGHT_GRAY));
+
+                        target.sendMessage(selectedDifficultyComponent);
+                        player.sendMessage(selectedDifficultyComponentTarget);
+
+                        chainTogether(target, player, difficulty);
+                    }))).appendSpace();
+        }
+
         player.sendMessage(playerComponent);
         target.sendMessage(targetComponent);
-
-        chainTogether(target, player);
+        target.sendMessage(difficultyComponent);
     }
 
-    public void chainTogether(Player player, Player target) {
+    public void chainTogether(Player player, Player target, Difficulty difficulty) {
         Chain chain = Chain.builder()
                 .player(player)
                 .target(target)
+                .difficulty(difficulty)
                 .build();
         chain.attachLeash();
 
