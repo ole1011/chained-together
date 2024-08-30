@@ -23,6 +23,7 @@ import static de.ole101.chained.common.Colors.BLUE;
 import static de.ole101.chained.common.Colors.GREEN;
 import static de.ole101.chained.common.Colors.LIGHT_GRAY;
 import static de.ole101.chained.common.Colors.YELLOW;
+import static net.kyori.adventure.text.Component.keybind;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.event.ClickEvent.callback;
 
@@ -89,9 +90,9 @@ public class ChainService {
                                 .append(text("ausgewählt.", LIGHT_GRAY));
 
                         Component disbandInstructions = text("Drücke", LIGHT_GRAY).appendSpace()
-                                .append(text("Shift", YELLOW)).appendSpace()
+                                .append(keybind("key.sneak", YELLOW)).appendSpace()
                                 .append(text("+", LIGHT_GRAY)).appendSpace()
-                                .append(text("Rechtsklick", YELLOW)).appendSpace()
+                                .append(keybind("key.mouse.right", YELLOW)).appendSpace()
                                 .append(text("auf deinen Partner, um die Kette aufzulösen"));
 
                         target.sendMessage(selectedDifficultyComponent);
