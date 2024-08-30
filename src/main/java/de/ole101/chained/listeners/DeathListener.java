@@ -17,7 +17,7 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        if (!event.getEntityType().equals(SLIME)) {
+        if (event.getEntityType() != SLIME) {
             return;
         }
 
@@ -26,5 +26,4 @@ public class DeathListener implements Listener {
 
         event.setCancelled(isChain);
     }
-
 }
