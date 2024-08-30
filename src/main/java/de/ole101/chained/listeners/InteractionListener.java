@@ -38,7 +38,6 @@ public class InteractionListener implements Listener {
                 .findFirst()
                 .orElse(null);
         if (chain != null) {
-
             if (player.isSneaking()) {
                 Player chainPartner = chain.getPlayer().equals(player) ? chain.getTarget() : chain.getPlayer();
 
