@@ -31,6 +31,11 @@ public class ChainedTogether extends JavaPlugin {
     }
 
     @Override
+    public void onDisable() {
+        this.chainService.getActiveChains().forEach(Chain::disband);
+    }
+
+    @Override
     public void onEnable() {
         long startTime = System.currentTimeMillis();
 
@@ -39,10 +44,5 @@ public class ChainedTogether extends JavaPlugin {
         this.registry.registerAllListeners();
 
         log.info("ChainedTogether enabled in {}ms", System.currentTimeMillis() - startTime);
-    }
-
-    @Override
-    public void onDisable() {
-        this.chainService.getActiveChains().forEach(Chain::disband);
     }
 }
