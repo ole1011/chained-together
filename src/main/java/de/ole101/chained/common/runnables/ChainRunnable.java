@@ -27,7 +27,8 @@ public class ChainRunnable extends BukkitRunnable {
         }
 
         double distance = player.getLocation().distance(target.getLocation());
-        if (distance > this.chain.getDifficulty().getChainLength()) {
+        double chainLength = this.chain.getDifficulty().getChainLength();
+        if (distance > chainLength) {
             long lastMovementPlayer = this.chainService.getLastMoved().getOrDefault(player.getUniqueId(), 0L);
             long lastMovementTarget = this.chainService.getLastMoved().getOrDefault(target.getUniqueId(), 0L);
 
@@ -54,7 +55,7 @@ public class ChainRunnable extends BukkitRunnable {
 
             Vector pullingPlayerLocationVector = pullingPlayer.getLocation().toVector();
             Vector pulledPlayerLocationVector = pulledPlayer.getLocation().toVector();
-            double multiplier = Math.max(0.5, (distance - 5) * 0.5);
+            double multiplier = Math.max(0.5, (distance - chainLength) * 0.5);
 
             Vector velocity = pullingPlayerLocationVector.subtract(pulledPlayerLocationVector).normalize().multiply(multiplier);
             pulledPlayer.setVelocity(velocity);
