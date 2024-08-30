@@ -59,8 +59,6 @@ public class ChainService {
     }
 
     public void acceptRequest(Player player, Player target) {
-        this.requestedChains.remove(target.getUniqueId());
-
         Component playerComponent = text("Du hast die Coop-Anfrage von", LIGHT_GRAY).appendSpace()
                 .append(text(target.getName(), YELLOW)).appendSpace()
                 .append(text("angenommen.", GREEN));
@@ -78,6 +76,8 @@ public class ChainService {
                         if (this.activeChains.stream().anyMatch(chain -> chain.getPlayer().equals(player) || chain.getTarget().equals(player))) {
                             return;
                         }
+
+                        this.requestedChains.remove(target.getUniqueId());
 
                         Component selectedDifficultyComponent = text("Du hast die Schwierigkeit", LIGHT_GRAY).appendSpace()
                                 .append(text(difficulty.getDisplayName(), difficulty.getColor())).appendSpace()
