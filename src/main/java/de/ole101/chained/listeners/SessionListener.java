@@ -40,8 +40,7 @@ public class SessionListener implements Listener {
                 .findFirst()
                 .ifPresent(chain -> {
                     Player target = chain.getPlayer() == player ? chain.getTarget() : player;
-                    this.chainService.getActiveChains().remove(chain);
-                    chain.disband();
+                    this.chainService.disbandChain(chain);
 
                     target.sendMessage(text("Da", LIGHT_GRAY).appendSpace()
                             .append(text(player.getName(), YELLOW)).appendSpace()

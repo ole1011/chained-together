@@ -2,6 +2,7 @@ package de.ole101.chained.listeners;
 
 import com.google.inject.Inject;
 import de.ole101.chained.common.annotations.RegisteredListener;
+import de.ole101.chained.common.models.Chain;
 import de.ole101.chained.services.ChainService;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -11,6 +12,8 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.util.Vector;
 
+import static de.ole101.chained.common.Colors.LIGHT_GRAY;
+import static net.kyori.adventure.text.Component.text;
 import static org.bukkit.inventory.EquipmentSlot.OFF_HAND;
 
 @RegisteredListener
@@ -30,7 +33,24 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        if (this.chainService.getActiveChains().stream().anyMatch(chain -> chain.getPlayer().equals(player) || chain.getTarget().equals(player))) {
+        Chain chain = this.chainService.getActiveChains().stream()
+                .filter(c -> c.getPlayer().equals(player) || c.getTarget().equals(player))
+                .findFirst()
+                .orElse(null);
+        if (chain != null) {
+
+            if (player.isSneaking()) {
+                Player chainPartner = chain.getPlayer().equals(player) ? chain.getTarget() : chain.getPlayer();
+
+                if (!chainPartner.equals(target)) {
+                    return;
+                }
+
+                this.chainService.disbandChain(chain);
+                player.sendMessage(text("Du hast die Kette aufgelöst.", LIGHT_GRAY));
+                chainPartner.sendMessage(text("Dein Partner hat die Kette aufgelöst.", LIGHT_GRAY));
+            }
+
             return;
         }
 

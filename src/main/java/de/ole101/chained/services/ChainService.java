@@ -88,8 +88,17 @@ public class ChainService {
                                 .append(text(difficulty.getDisplayName(), difficulty.getColor())).appendSpace()
                                 .append(text("ausgewählt.", LIGHT_GRAY));
 
+                        Component disbandInstructions = text("Drücke", LIGHT_GRAY).appendSpace()
+                                .append(text("Shift", YELLOW)).appendSpace()
+                                .append(text("+", LIGHT_GRAY)).appendSpace()
+                                .append(text("Rechtsklick", YELLOW)).appendSpace()
+                                .append(text("auf deinen Partner, um die Kette aufzulösen"));
+
                         target.sendMessage(selectedDifficultyComponent);
                         player.sendMessage(selectedDifficultyComponentTarget);
+
+                        player.sendMessage(disbandInstructions);
+                        target.sendMessage(disbandInstructions);
 
                         chainTogether(target, player, difficulty);
                     }))).appendSpace();
@@ -112,5 +121,10 @@ public class ChainService {
         chain.setTask(task);
 
         this.activeChains.add(chain);
+    }
+
+    public void disbandChain(Chain chain) {
+        this.activeChains.remove(chain);
+        chain.disband();
     }
 }
