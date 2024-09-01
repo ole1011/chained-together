@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/ole1011/chained-together/blob/main/.github/chainedtogether.png">
+    <img src="https://github.com/ole1011/chained-together/blob/main/.github/chained-together.png" alt="Title Image">
 </div>
 
 ## Purpose
