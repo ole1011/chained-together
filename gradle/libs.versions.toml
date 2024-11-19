@@ -1,5 +1,5 @@
 [versions]
-lombok = "1.18.34"
+lombok = "1.18.36"
 guice = "7.0.0"
 annotations = "26.0.1"
 classindex = "3.13"
