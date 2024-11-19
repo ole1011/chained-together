@@ -5,7 +5,7 @@ annotations = "26.0.1"
 classindex = "3.13"
 
 shadow = "8.1.1"
-paperweight-userdev = "1.7.4"
+paperweight-userdev = "1.7.5"
 run-paper = "2.3.1"
 
 [libraries]
